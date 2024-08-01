@@ -291,3 +291,7 @@ print(minimal_top([1, (1+math.sqrt(5))/2]))
 #Plan for tomorrow:
 #Keep working on geometric visualization
 #Try to figure out why red and blue don't match exactly
+
+#Can a non minimal topping be central? Like on the line between (0,0,1) and (1,t,t^3), are there any central pts besides (1,t,t^3)
+#If a periodic perm seq generates a limcone of rank greater than 1, are all vectors in that limcone centraL?
+#Are there limcones with no rational vertices? Check Raney's notes for this

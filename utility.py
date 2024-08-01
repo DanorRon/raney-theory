@@ -199,8 +199,14 @@ def next_xk(xk):
 #This function is a bit weird bc floating-point arithmetic determines how accurately we can find the depth
 #def depth(x)
 
+def angle():
+    #get angle of vector/limcone/cone
 
-def initialize_plotter(shape):
+def ang_diam():
+    #get angular diameter of vector/limcone/cone
+
+
+def initialize_plotter_3D(shape):
     """
     """
 
@@ -215,6 +221,26 @@ def initialize_plotter(shape):
             #pl.add_mesh(pv.Line((0,0,0), (5,0,0)), line_width=3, color='black')
             triangle = pv.UnstructuredGrid([3, *list(range(3))], [pv.CellType.TRIANGLE], [[1,0,0], [0,1,0], [0,0,1]])
             pl.add_mesh(triangle)
+            pl.camera.position = (5,5,5)
+            #pl.camera.SetParallelProjection(True)
+
+    return pl
+
+def initialize_plotter_4D(shape):
+    """
+    """
+    
+    pl = pv.Plotter(shape=shape)
+
+    for i in range(shape[0]):
+        for j in range(shape[1]):
+            pl.subplot(i,j)
+            pl.show_bounds(bounds=[-5,5,-5,5,-5,5], location='all')
+            #pl.add_mesh(pv.Line((0,0,0), (0,0,5)), line_width=3, color='black')
+            #pl.add_mesh(pv.Line((0,0,0), (0,5,0)), line_width=3, color='black')
+            #pl.add_mesh(pv.Line((0,0,0), (5,0,0)), line_width=3, color='black')
+            #tetrahedron = pv.UnstructuredGrid([4, *list(range(4))], [pv.CellType.BEZIER_TETRAHEDRON], [[1,0,0,0], [0,1,0,0], [0,0,1,0], [0,0,0,1]]) #TODO
+            #pl.add_mesh(tetrahedron)
             pl.camera.position = (5,5,5)
             #pl.camera.SetParallelProjection(True)
 
