@@ -85,6 +85,13 @@ def generate_limcone(perms, repeating=False, iters=100):
         iterated_matrix = np.linalg.matrix_power(matrix, iters)
         return iterated_matrix
 
+def normalize_vec(raw):
+    """
+    Normalize a vector so that it lies on the fundamental simplex
+    """
+    norm = [float(i)/sum(raw) for i in raw]
+    return norm
+
 def normalize_columns(matrix):
     """
     Normalize the columns of a square matrix independently from each other so each column vector lies on the fundamental simplex
@@ -191,3 +198,24 @@ def next_xk(xk):
 
 #This function is a bit weird bc floating-point arithmetic determines how accurately we can find the depth
 #def depth(x)
+
+
+def initialize_plotter(shape):
+    """
+    """
+
+    pl = pv.Plotter(shape=shape)
+
+    for i in range(shape[0]):
+        for j in range(shape[1]):
+            pl.subplot(i,j)
+            pl.show_bounds(bounds=[-5,5,-5,5,-5,5], location='all')
+            #pl.add_mesh(pv.Line((0,0,0), (0,0,5)), line_width=3, color='black')
+            #pl.add_mesh(pv.Line((0,0,0), (0,5,0)), line_width=3, color='black')
+            #pl.add_mesh(pv.Line((0,0,0), (5,0,0)), line_width=3, color='black')
+            triangle = pv.UnstructuredGrid([3, *list(range(3))], [pv.CellType.TRIANGLE], [[1,0,0], [0,1,0], [0,0,1]])
+            pl.add_mesh(triangle)
+            pl.camera.position = (5,5,5)
+            #pl.camera.SetParallelProjection(True)
+
+    return pl
