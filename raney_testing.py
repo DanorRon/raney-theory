@@ -295,3 +295,11 @@ print(minimal_top([1, (1+math.sqrt(5))/2]))
 #Can a non minimal topping be central? Like on the line between (0,0,1) and (1,t,t^3), are there any central pts besides (1,t,t^3)
 #If a periodic perm seq generates a limcone of rank greater than 1, are all vectors in that limcone centraL?
 #Are there limcones with no rational vertices? Check Raney's notes for this
+
+#Things to do:
+#Understand proofs (specifically UMTC face proof)
+#Write up outline of overall theory and construction
+#Derive 3d/2d mapping and 4d/3d mapping
+#Write up list of known facts/theorems
+#Try to figure out if there's a connection between periodicity/nonconstancy and higher rank limcones
+#Figure out/write code for propagating a point through depth (I think the theory for this is more grounded as of now)

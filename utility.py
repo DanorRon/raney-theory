@@ -50,6 +50,7 @@ def is_central(x):
     """
     comparison_const = 100
     sum = central_sum(x)
+    print("topping value is " + str(sum))
     if sum < comparison_const*max(x): # Returns peripheral if the central sum is much greater than the maximum coordinate of x
         return True
     else:
@@ -199,10 +200,10 @@ def next_xk(xk):
 #This function is a bit weird bc floating-point arithmetic determines how accurately we can find the depth
 #def depth(x)
 
-def angle():
+#def angle():
     #get angle of vector/limcone/cone
 
-def ang_diam():
+#def ang_diam():
     #get angular diameter of vector/limcone/cone
 
 
