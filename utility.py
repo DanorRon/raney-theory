@@ -50,7 +50,7 @@ def is_central(x):
     """
     comparison_const = 100
     sum = central_sum(x)
-    print("topping value is " + str(sum))
+    #print("topping value is " + str(sum))
     if sum < comparison_const*max(x): # Returns peripheral if the central sum is much greater than the maximum coordinate of x
         return True
     else:
@@ -175,7 +175,7 @@ def is_isotone(x):
             prev = curr
     return True
 
-#TODO check if this works properly
+#TODO check if this works properly; I think it does
 def permute(x, perm):
     """
     Returns xP, the result of applying perm to x
@@ -184,6 +184,14 @@ def permute(x, perm):
     for i in range(len(x)):
         new_x[i] = x[perm[i]]
     return new_x
+
+#TODO need to check
+def inverse_permute(x, perm):
+    new_x = np.zeros((len(x)))
+    for i in range(len(x)):
+        new_x[perm[i]] = x[i]
+    return new_x
+
 
 def next_xk(xk):
     """
@@ -196,6 +204,23 @@ def next_xk(xk):
     x_k1 = np.linalg.inv(M_P_k1) @ xk
     #print(str(M_P_k1) + "  " + str(x_k1))
     return x_k1
+
+def propagate_depth(points, matrix):
+    """
+    Given a set of points and a matrix, returns the set that results from multiplying the matrix by every point
+    """
+    new_points = []
+    for element in points:
+        new_points.append(matrix @ element)
+    return new_points
+
+def barycentric_to_cartesian_2d(vec):
+    """
+    Converts a vector given in barycentric coordinates (3 elements) to cartesian coordinates (2 elements)
+    """
+    x = vec[0] * math.sqrt(2) + vec[1] * (math.sqrt(2)/2) + vec[2] * 0
+    y = vec[0] * 0 + vec[1] * (math.sqrt(6)/2) + vec[2] * 0
+    return np.array([x,y])
 
 #This function is a bit weird bc floating-point arithmetic determines how accurately we can find the depth
 #def depth(x)
