@@ -222,6 +222,15 @@ def barycentric_to_cartesian_2d(vec):
     y = vec[0] * 0 + vec[1] * (math.sqrt(6)/2) + vec[2] * 0
     return np.array([x,y])
 
+def barycentric_to_cartesian_3d(vec):
+    """
+    Converts a vector given in 4D barycentric coordinates (4 elements) to 3D cartesian coordinates (3 elements)
+    """
+    x = vec[0] * math.sqrt(2) + vec[1] * (math.sqrt(2)/2) + vec[2] * (math.sqrt(2)/2) + vec[3] * 0
+    y = vec[0] * 0 + vec[1] * (math.sqrt(6)/2) + vec[2] * (math.sqrt(6)/6) + vec[3] * 0
+    z = vec[0] * 0 + vec[1] * 0 + vec[2] * (2/math.sqrt(3)) + vec[3] * 0
+    return np.array([x,y,z])
+
 #This function is a bit weird bc floating-point arithmetic determines how accurately we can find the depth
 #def depth(x)
 
@@ -248,7 +257,7 @@ def initialize_plotter_3D(shape):
             triangle = pv.UnstructuredGrid([3, *list(range(3))], [pv.CellType.TRIANGLE], [[1,0,0], [0,1,0], [0,0,1]])
             pl.add_mesh(triangle)
             pl.camera.position = (5,5,5)
-            #pl.camera.SetParallelProjection(True)
+            pl.camera.SetParallelProjection(True)
 
     return pl
 
@@ -265,9 +274,23 @@ def initialize_plotter_4D(shape):
             #pl.add_mesh(pv.Line((0,0,0), (0,0,5)), line_width=3, color='black')
             #pl.add_mesh(pv.Line((0,0,0), (0,5,0)), line_width=3, color='black')
             #pl.add_mesh(pv.Line((0,0,0), (5,0,0)), line_width=3, color='black')
-            #tetrahedron = pv.UnstructuredGrid([4, *list(range(4))], [pv.CellType.BEZIER_TETRAHEDRON], [[1,0,0,0], [0,1,0,0], [0,0,1,0], [0,0,0,1]]) #TODO
-            #pl.add_mesh(tetrahedron)
+            tetrahedron = pv.UnstructuredGrid([4, *list(range(4))], [pv.CellType.BEZIER_TETRAHEDRON], [[math.sqrt(2),0,0], [math.sqrt(2)/2,math.sqrt(6)/2,0], [math.sqrt(2)/2,math.sqrt(6)/6,2/math.sqrt(3)], [0,0,0]]) #TODO
+            pl.add_mesh(tetrahedron, opacity=0.5)
+            '''
+            triangle = pv.UnstructuredGrid([3, *list(range(3))], [pv.CellType.TRIANGLE], [[math.sqrt(2),0,0], [math.sqrt(2)/2,math.sqrt(6)/2,0], [0,0,0]])
+            pl.add_mesh(triangle)
+
+            triangle = pv.UnstructuredGrid([3, *list(range(3))], [pv.CellType.TRIANGLE], [[math.sqrt(2)/2,math.sqrt(6)/2,0], [math.sqrt(2)/2,math.sqrt(6)/4,2/math.sqrt(3)], [0,0,0]])
+            pl.add_mesh(triangle)
+
+            triangle = pv.UnstructuredGrid([3, *list(range(3))], [pv.CellType.TRIANGLE], [[math.sqrt(2),0,0], [math.sqrt(2)/2,math.sqrt(6)/4,2/math.sqrt(3)], [0,0,0]])
+            pl.add_mesh(triangle)
+
+            triangle = pv.UnstructuredGrid([3, *list(range(3))], [pv.CellType.TRIANGLE], [[math.sqrt(2),0,0], [math.sqrt(2)/2,math.sqrt(6)/2,0], [math.sqrt(2)/2,math.sqrt(6)/4,2/math.sqrt(3)]])
+            pl.add_mesh(triangle)
+            '''
+            
             pl.camera.position = (5,5,5)
             #pl.camera.SetParallelProjection(True)
-
+            
     return pl

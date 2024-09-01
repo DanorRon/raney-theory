@@ -54,6 +54,7 @@ print(normalize_vec(minimal_top(on_line.tolist())))
 
 #print(generate_limcone([[0,1,2], [1,0,2]], repeating=True))
 
+'''
 tick = 0
 matrix = np.identity(3)
 for i in range(100):
@@ -67,3 +68,14 @@ for i in range(100):
     corner_vecs = np.transpose(matrix_normalized)
     print("dist0: " + str(math.dist(corner_vecs[0], corner_vecs[2])))
     print("dist1: " + str(math.dist(corner_vecs[1], corner_vecs[2])))
+'''
+
+#print(np.transpose(normalize_columns(generate_limcone(perms=[[0,1,2], [1,2,0]], repeating=True))))
+
+a = find_perm_seq([1,1,0])
+print(a)
+print(generate_limcone([[1,2,0]]))
+
+
+#I think nonperiodic sequences can still create central limcones, the requirement is that the norm is ultimately >= 1. Look into this
+#This might mean that everything is either central or a topping
